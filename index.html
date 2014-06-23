@@ -1,27 +1,55 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel="stylesheet" type="text/css" href="index.css">
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
+    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+    <title>Twittler</title>
   </head>
   <body>
+    <div class="navbar">
+      <h1>Twittler</h1>
+    </div>
+    <div class="body">
+      <div class="userBox"></div>
+      <div class="trendsBox"></div>
+      <div class="tweetBox">
+        <h3>Tweets</h3>
+        <hr>
+      </div>
+      <div class="followBox"></div>
+      <div class="currentEventBox"></div>
+    </div>
     <script>
-
-      $(document).ready(function(){
-        var $body = $('body');
-        $body.html('');
+      $(document).ready(function displayTweets() {
+        var $tweets = $('.tweetBox');
+        $('.tweet').remove();
 
         var index = streams.home.length - 1;
         while(index >= 0){
           var tweet = streams.home[index];
-          var $tweet = $('<div></div>');
-          $tweet.text('@' + tweet.user + ': ' + tweet.message);
-          $tweet.appendTo($body);
+          var $tweet = $('<div class="tweet"></div>');
+          $tweet.text('@' + tweet.user + " - " + tweet.created_at + ' : ' + tweet.message);
+          $tweet.appendTo($tweets).fadeIn('slow');
           index -= 1;
-        }
+          var tweetCount = streams.home.length - 1;
+        };
 
-      });
+      var showNewTweets = function() {
+        $('.tweetBox > hr').after('<div class="newTweetSection"><a href="#" class="newTweets">View new Tweets</a></div><hr class="removableHr">');
 
-    </script>
+        $(document).ready(function() {
+          $('a.newTweets').click(function() {
+            $('.newTweetSection').remove();
+            displayTweets();
+          });
+        });
+      };
+
+      setTimeout(showNewTweets, 3000);
+    });
+  </script>
   </body>
 </html>
