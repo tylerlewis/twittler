@@ -18,6 +18,7 @@
       <div class="tweetBox">
         <h3>Tweets</h3>
         <hr>
+        <div class="newTweetSection" display="none"><p style="color: blue"></p><hr></div>
       </div>
       <div class="followBox"></div>
       <div class="currentEventBox"></div>
@@ -31,25 +32,38 @@
         while(index >= 0){
           var tweet = streams.home[index];
           var $tweet = $('<div class="tweet"></div>');
-          $tweet.text('@' + tweet.user + " - " + tweet.created_at + ' : ' + tweet.message);
+          $tweet.append('<p style="color: blue" class="userLink">@' + tweet.user + '</p>' + " - " + tweet.created_at + ' : ' + tweet.message);
           $tweet.appendTo($tweets).fadeIn('slow');
           index -= 1;
-          var tweetCount = streams.home.length - 1;
         };
 
-      var showNewTweets = function() {
-        $('.tweetBox > hr').after('<div class="newTweetSection"><a href="#" class="newTweets">View new Tweets</a></div><hr class="removableHr">');
+        var showNewTweets = function() {
+          $(document).ready(function() {
+            var newTweetCount = (streams.home.length - $('.tweet').length);
+            $('.newTweetSection > p').text("View " + newTweetCount + " new Tweets");
+            if(newTweetCount > 0) {
+              $('.newTweetSection').slideDown("slow");
+            };
+          });
+
+          $(document).ready(function() {
+            $('.newTweetSection').on("click", function() {
+              $(this).slideUp("slow");
+              displayTweets();
+            });
+          });
+        };
+
+        var displayProfile = function(user) {
+
+        }
 
         $(document).ready(function() {
-          $('a.newTweets').click(function() {
-            $('.newTweetSection').remove();
-            displayTweets();
-          });
+          $();
         });
-      };
 
-      setTimeout(showNewTweets, 3000);
-    });
+        setInterval(showNewTweets, 3000);
+      });
   </script>
   </body>
 </html>
