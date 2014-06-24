@@ -2,9 +2,16 @@ body {
 	margin: 0px auto;
 	padding: 0px auto;
 	background-color: #C0DEED;
+	font-family: Arial;
 }
 
 hr {
+	margin: 0px auto;
+	padding: 0px auto;
+}
+
+p {
+	display: inline-block;
 	margin: 0px auto;
 	padding: 0px auto;
 }
@@ -59,29 +66,35 @@ hr {
 }
 
 .tweetBox h3 {
-	margin-top: 5px;
-	margin-bottom: 5px;
+	margin-top: 9px;
+	margin-bottom: 9px;
 	margin-left: 10px;
 	padding: 0px auto;
 }
 
 .newTweetSection {
-	padding-top: 10px;
-	padding-bottom: 10px;
+	display: none;
+	margin: 0px auto;
+	padding: 0px auto;
+	cursor: pointer;
 }
 
-a.newTweets {
-	width: 20%;
+.newTweetSection:hover {
+	background-color: #D3D3D3;
+}
+
+.newTweetSection p {
+	width: auto;
+	margin-top: 10px;
 	margin-bottom: 10px;
-	margin-left: 40%;
+	margin-left: 38.3636%;
 }
 
 .tweet {
 	height: auto;
-	width: 90.9091%;
+	width: 91.2727%;
 	margin-top: 5px;
-	margin-left: 4.5455%;
-	padding: inherit;
+	margin-left: 4.3636%;
 	border: 1px solid black;
 }
 
