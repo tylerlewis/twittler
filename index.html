@@ -10,10 +10,18 @@
   </head>
   <body>
     <div class="navbar">
+      <div class="homePage">
+        <div class="newTweetsCircle"></div>
+        <h4>Home</h4>
+        <div class="nowViewingBox"></div>
+      </div>
       <h1>Twittler</h1>
     </div>
     <div class="body">
-      <div class="userBox"></div>
+      <div class="userBox">
+        <div id="userBoxUpper"></div>
+        <div id="userBoxLower"><p></p></div>
+      </div>
       <div class="trendsBox"></div>
       <div class="tweetBox">
         <h3>Tweets</h3>
@@ -24,45 +32,70 @@
       <div class="currentEventBox"></div>
     </div>
     <script>
-      $(document).ready(function displayTweets() {
-        var $tweets = $('.tweetBox');
-        $('.tweet').remove();
+      $(document).ready(function() {
+        var viewingHome = true;
 
-        var index = streams.home.length - 1;
-        while(index >= 0){
-          var tweet = streams.home[index];
-          var $tweet = $('<div class="tweet"></div>');
-          $tweet.append('<p style="color: blue" class="userLink">@' + tweet.user + '</p>' + " - " + tweet.created_at + ' : ' + tweet.message);
-          $tweet.appendTo($tweets).fadeIn('slow');
-          index -= 1;
-        };
+        var displayTweets = function(currentUser) {
+          var $tweets = $('.tweetBox');
+          $('.tweet').remove();
 
-        var showNewTweets = function() {
-          $(document).ready(function() {
-            var newTweetCount = (streams.home.length - $('.tweet').length);
-            $('.newTweetSection > p').text("View " + newTweetCount + " new Tweets");
-            if(newTweetCount > 0) {
-              $('.newTweetSection').slideDown("slow");
-            };
-          });
-
-          $(document).ready(function() {
-            $('.newTweetSection').on("click", function() {
-              $(this).slideUp("slow");
-              displayTweets();
-            });
-          });
-        };
-
-        var displayProfile = function(user) {
-
+          if(currentUser === undefined) {
+            var index = streams.home.length - 1;
+            var stream = streams.home;
+          } else {
+            var index = streams.users[currentUser].length - 1;
+            var stream = streams.users[currentUser];
+          };
+          while(index >= 0) {
+            var tweet = stream[index];
+            var $tweet = $('<div class="tweet"></div>');
+            $tweet.append('<p style="color: blue" class="userLink">@' + tweet.user + '</p>' + " - " + tweet.created_at + ' : ' + '<BR/>' + tweet.message);
+            $tweet.appendTo($tweets).fadeIn('slow');
+            index -= 1;
+          };
         }
 
-        $(document).ready(function() {
-          $();
+        displayTweets();
+
+        var showNewTweets = function() {
+          var newTweetCount = (streams.home.length - $('.tweet').length);
+          $('.newTweetSection > p').text("View " + newTweetCount + " new Tweets");
+          if(newTweetCount > 0) {
+            $('.newTweetsCircle').show()
+            $('.newTweetSection').slideDown("slow");
+          };
+
+          $('.newTweetSection').on("click", function() {
+            $(this).slideUp("slow");
+            displayTweets();
+          });
+        };
+
+        $(document).on("click", "p.userLink", function() {
+          $('.newTweetsCircle').hide();
+          $('.nowViewingBox').hide();
+          $('.newTweetSection').slideUp("slow");
+          viewingHome = false;
+          var handle = $(this).text();
+          $('#userBoxLower > p').html("Now viewing " + handle + "'s profile. Click \"Home\" to view the full stream.");
+          var currentUser = [handle.slice(1)];
+          displayTweets(currentUser);
         });
 
-        setInterval(showNewTweets, 3000);
+        $(document).on("click", ".homePage", function() {
+          $('.newTweetsCircle').hide();
+          $('.nowViewingBox').show();
+          $('#userBoxLower > p').html('');
+          $('.newTweetSection').slideUp("slow");
+          viewingHome = true;
+          displayTweets();
+        });
+
+        setInterval(function() {
+          if(viewingHome) {
+            showNewTweets();
+          };
+        }, 3000);
       });
   </script>
   </body>
