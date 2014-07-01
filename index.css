@@ -23,11 +23,52 @@ p {
 	margin: 0px auto;
 	padding: 0px auto;
 	background-color: white;
-	border-bottom: 1px solid #4099FF;
+	border-bottom: 1px solid #0084b4;
+}
+
+.homePage {
+	position: absolute;
+	margin: 0px auto;
+	margin-left: 7.6095%;
+	padding: 0px auto;
+	height: 50px;
+	width: 6.9493%;
+	cursor: pointer;
+}
+
+.homePage h4 {
+	position: absolute;
+	color: #66757f;
+	width: 42%;
+	height: 18px;
+	margin: 0px auto;
+	margin-top: 16px;
+	margin-left: 29%;
+}
+
+.newTweetsCircle {
+	display: none;
+	position: absolute;
+	margin-top: 10px;
+	margin-left: 10%;
+	background-color: #0084b4;
+	height: 6.5px;
+	width: 6.5px;
+	border-radius: 50%;
+	border: 1px solid #0084b4;
+}
+
+.nowViewingBox {
+	position: absolute;
+	margin-top: 46px;
+	padding: 0px auto;
+	background-color: #0084b4;
+	width: 100%;
+	height: 4px;
 }
 
 .navbar h1 {
-	display: inline-block;
+	position: absolute;
 	margin-top: 11px;
 	margin-left: 46.6296%;
 	width: auto;
@@ -37,7 +78,6 @@ p {
 
 .body {
 	display: block;
-	position: absolute;
 	height: auto;
 	width: 100%;
 	margin: 0px auto;
@@ -45,8 +85,41 @@ p {
 }
 
 .userBox {
+	position: absolute;
+	margin-top: 10px;
+	margin-left: 7.6095%;
+	padding: 0px auto;
+	background-color: white;
+	height: 300px;
+	width: 20.8478%;
+	border-radius: 5px;
+}
+
+#userBoxUpper {
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
 	margin: 0px auto;
 	padding: 0px auto;
+	height: 120px;
+	width: 100%;
+	background-color: #0084b4;
+}
+
+#userBoxLower {
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	margin: 0px auto;
+	padding: 0px auto;
+	height: 180px;
+	width: 100%;
+}
+
+#userBoxLower p {
+	height: auto;
+	width: 60%;
+	padding: 0px auto;
+	margin-top: 36px;
+	margin-left: 20%;
 }
 
 .trendsBox {
@@ -55,14 +128,14 @@ p {
 }
 
 .tweetBox {
-	display: inline-block;
-	width: 38.221%;
+	position: absolute;
+	width: 41.6956%;
 	height: auto;
 	margin-top: 10px;
-	margin-left: 30.8895%;
+	margin-left: 29.1522%;
 	padding-bottom: 5px;
 	background-color: white;
-	border-radius: 10px;
+	border-radius: 5px;
 }
 
 .tweetBox h3 {
@@ -92,10 +165,15 @@ p {
 
 .tweet {
 	height: auto;
-	width: 91.2727%;
+	width: 96.3636%;
 	margin-top: 5px;
-	margin-left: 4.3636%;
+	margin-left: 1.8182%;
 	border: 1px solid black;
+}
+p.userLink {
+	margin: 0px auto;
+	padding: 0px auto;
+	cursor: pointer;
 }
 
 .lineBreak {
